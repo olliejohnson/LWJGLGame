@@ -3,6 +3,7 @@ package io.oliverj.game;
 import io.oliverj.engine.*;
 import io.oliverj.engine.graph.Camera;
 import io.oliverj.engine.graph.Mesh;
+import io.oliverj.engine.graph.OBJLoader;
 import io.oliverj.engine.graph.Texture;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -34,61 +35,8 @@ public class DummyGame implements IGameLogic {
     @Override
     public void init(Window window) throws Exception {
         renderer.init(window);
-        float[] positions = new float[]{
-                -0.5f, 0.5f, 0.5f,
-                -0.5f, -0.5f, 0.5f,
-                0.5f, -0.5f, 0.5f,
-                0.5f, 0.5f, 0.5f,
-                -0.5f, 0.5f, -0.5f,
-                0.5f, 0.5f, -0.5f,
-                -0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-                -0.5f, 0.5f, -0.5f,
-                0.5f, 0.5f, -0.5f,
-                -0.5f, 0.5f, 0.5f,
-                0.5f, 0.5f, 0.5f,
-                0.5f, 0.5f, 0.5f,
-                0.5f, -0.5f, 0.5f,
-                -0.5f, 0.5f, 0.5f,
-                -0.5f, -0.5f, 0.5f,
-                -0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-                -0.5f, -0.5f, 0.5f,
-                0.5f, -0.5f, 0.5f,
 
-        };
-
-        float[] textCoords = new float[]{
-                0.0f, 0.0f,
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-                0.5f, 0.0f,
-                0.0f, 0.0f,
-                0.5f, 0.0f,
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-                0.0f, 0.5f,
-                0.5f, 0.5f,
-                0.0f, 1.0f,
-                0.5f, 1.0f,
-                0.0f, 0.0f,
-                0.0f, 0.5f,
-                0.5f, 0.0f,
-                0.5f, 0.5f,
-                0.5f, 0.0f,
-                1.0f, 0.0f,
-                0.5f, 0.5f,
-                1.0f, 0.5f,
-        };
-
-        int[] indices = new int[]{
-                0, 1, 3, 3, 1, 2,
-                8, 10, 11, 9, 8, 11,
-                12, 13, 7, 5, 12, 7,
-                14, 15, 6, 4, 14, 6,
-                16, 18, 19, 17, 16, 19,
-                4, 6, 7, 5, 4, 7,
-        };
+        Mesh mesh = OBJLoader.loadMesh("/models/block.obj");
         Texture texture = new Texture("textures/grassblock.png");
         mesh.setTexture(texture);
         GameItem gameItem = new GameItem(mesh);
