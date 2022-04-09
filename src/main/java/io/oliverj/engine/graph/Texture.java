@@ -2,6 +2,8 @@ package io.oliverj.engine.graph;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+
+import io.oliverj.engine.Utils;
 import org.lwjgl.system.MemoryStack;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -38,7 +40,7 @@ public class Texture {
             IntBuffer h = stack.mallocInt(1);
             IntBuffer channels = stack.mallocInt(1);
 
-            buf = stbi_load(fileName, w, h, channels, 4);
+            buf = stbi_load(Utils.loadResource(fileName), w, h, channels, 4);
             if (buf == null) {
                 throw new Exception("Image file [" + fileName  + "] not loaded: " + stbi_failure_reason());
             }
