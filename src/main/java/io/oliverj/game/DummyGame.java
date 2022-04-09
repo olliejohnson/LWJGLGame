@@ -19,6 +19,8 @@ public class DummyGame implements IGameLogic {
 
     private final Camera camera;
 
+    public Mesh mesh;
+
     private GameItem[] gameItems;
 
     private static final float CAMERA_POS_STEP = 0.05f;
@@ -88,20 +90,11 @@ public class DummyGame implements IGameLogic {
                 4, 6, 7, 5, 4, 7,
         };
         Texture texture = new Texture("textures/grassblock.png");
-        Mesh mesh = new Mesh(positions, textCoords, indices, texture);
-        GameItem gameItem1 = new GameItem(mesh);
-        gameItem1.setScale(0.5f);
-        gameItem1.setPosition(0, 0, -2);
-        GameItem gameItem2 = new GameItem(mesh);
-        gameItem2.setScale(0.5f);
-        gameItem2.setPosition(0.5f, 0.5f, -2);
-        GameItem gameItem3 = new GameItem(mesh);
-        gameItem3.setScale(0.5f);
-        gameItem3.setPosition(0, 0, -2.5f);
-        GameItem gameItem4 = new GameItem(mesh);
-        gameItem4.setScale(0.5f);
-        gameItem4.setPosition(0.5f, 0, -2.5f);
-        gameItems = new GameItem[]{gameItem1, gameItem2, gameItem3, gameItem4};
+        mesh.setTexture(texture);
+        GameItem gameItem = new GameItem(mesh);
+        gameItem.setScale(0.5f);
+        gameItem.setPosition(0, 0, -2);
+        gameItems = new GameItem[]{gameItem};
     }
 
     @Override

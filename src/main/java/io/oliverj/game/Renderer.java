@@ -3,6 +3,7 @@ package io.oliverj.game;
 import io.oliverj.engine.GameItem;
 import io.oliverj.engine.Utils;
 import io.oliverj.engine.Window;
+import io.oliverj.engine.graph.Mesh;
 import io.oliverj.engine.graph.ShaderProgram;
 import io.oliverj.engine.graph.Transformation;
 import io.oliverj.engine.graph.Camera;
@@ -35,6 +36,8 @@ public class Renderer {
         shaderProgram.createUniform("projectionMatrix");
         shaderProgram.createUniform("modelViewMatrix");
         shaderProgram.createUniform("texture_sampler");
+        shaderProgram.createUniform("colour");
+        shaderProgram.createUniform("useColour");
 
         window.setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     }
@@ -61,10 +64,14 @@ public class Renderer {
         shaderProgram.setUniform("texture_sampler", 0);
 
         for (GameItem gameItem : gameItems) {
+            Mesh mesh = gameItem.getMesh();
+
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(gameItem, viewMatrix);
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
 
-            gameItem.getMesh().render();
+            shaderProgram.setUniform("colour", mesh.getColour());
+            shaderProgram.setUniform("useColour", mesh.isTextured() ? 0 : 1);
+            mesh.render();
         }
 
         shaderProgram.unbind();
