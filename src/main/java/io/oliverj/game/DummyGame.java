@@ -42,6 +42,7 @@ public class DummyGame implements IGameLogic {
         Texture texture = new Texture("textures/grassblock.png");
         Material material = new Material(texture, reflectance);
 
+        mesh.setMaterial(material);
         GameItem gameItem = new GameItem(mesh);
         gameItem.setScale(0.5f);
         gameItem.setPosition(0, 0, -2);
