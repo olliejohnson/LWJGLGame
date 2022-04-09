@@ -20,8 +20,6 @@ public class DummyGame implements IGameLogic {
 
     private final Camera camera;
 
-    public Mesh mesh;
-
     private GameItem[] gameItems;
 
     private static final float CAMERA_POS_STEP = 0.05f;
