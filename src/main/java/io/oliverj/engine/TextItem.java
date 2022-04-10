@@ -4,7 +4,6 @@ import io.oliverj.engine.graph.Material;
 import io.oliverj.engine.graph.Mesh;
 import io.oliverj.engine.graph.Texture;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
