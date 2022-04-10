@@ -12,10 +12,13 @@ public class Transformation {
 
     private final Matrix4f viewMatrix;
 
+    private final Matrix4f orthoMatrix;
+
     public Transformation() {
         projectionMatrix = new Matrix4f();
         modelViewMatrix = new Matrix4f();
         viewMatrix = new Matrix4f();
+        orthoMatrix = new Matrix4f();
     }
 
     public final Matrix4f getProjectionMatrix(float fov, float width, float height, float zNear, float zFar) {
@@ -44,5 +47,25 @@ public class Transformation {
                 scale(gameItem.getScale());
         Matrix4f viewCurr = new Matrix4f(viewMatrix);
         return viewCurr.mul(modelViewMatrix);
+    }
+
+    public Matrix4f getOrthoProjectionMatrix(float left, float right, float bottom, float top) {
+        orthoMatrix.identity();
+        orthoMatrix.setOrtho2D(left, right, top, bottom);
+        return orthoMatrix;
+
+    }
+
+    public Matrix4f getOrtoProjModelMatrix(GameItem gameItem, Matrix4f orthoMatrix) {
+        Vector3f rotation = gameItem.getRotation();
+        Matrix4f modelMatrix = new Matrix4f();
+        modelMatrix.identity().translate(gameItem.getPosition()).
+                rotateX((float)Math.toRadians(-rotation.x)).
+                rotateY((float)Math.toRadians(-rotation.y)).
+                rotateZ((float)Math.toRadians(-rotation.z)).
+                scale(gameItem.getScale());
+        Matrix4f orthoMatrixCurr = new Matrix4f(orthoMatrix);
+        orthoMatrixCurr.mul(modelMatrix);
+        return orthoMatrixCurr;
     }
 }
