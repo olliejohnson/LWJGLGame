@@ -30,6 +30,7 @@ public class GameEngine implements Runnable{
     }
 
     protected void init() throws Exception {
+        System.setProperty("java.awt.headless", "true");
         window.init();
         timer.init();
         mouseInput.init(window);

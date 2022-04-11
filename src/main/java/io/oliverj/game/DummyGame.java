@@ -141,6 +141,8 @@ public class DummyGame implements IGameLogic {
         double angRad = Math.toRadians(lightAngle);
         sceneLight.getDirectionalLight().getDirection().x = (float) Math.sin(angRad);
         sceneLight.getDirectionalLight().getDirection().y = (float) Math.cos(angRad);
+
+        hud.rotateCompass(camera.getRotation().y);
     }
 
     @Override
