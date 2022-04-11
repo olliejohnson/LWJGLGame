@@ -2,7 +2,6 @@ package io.oliverj.game;
 
 import io.oliverj.engine.*;
 import io.oliverj.engine.graph.*;
-import io.oliverj.engine.graph.Texture;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
