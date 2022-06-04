@@ -22,13 +22,14 @@ public class Texture {
     public static Texture loadAsResource(String name) throws Exception {
         // 1 load image into ByteBuffer
         // 2 construct Texture using ByteBuffer
-        InputStream in = Texture.class.getResourceAsStream("/textures/grassblock.png");
-        byte [] bytes = in.readAllBytes();
-        ByteBuffer bfr = ByteBuffer.allocateDirect(bytes.length);
-        bfr.put(bytes,0,bytes.length);
-        bfr.flip();
-
-        Texture texture = new Texture(bfr);
+        Texture texture;
+        try (InputStream in = Texture.class.getResourceAsStream(name)) {
+            byte[] bytes = in.readAllBytes();
+            ByteBuffer bfr = ByteBuffer.allocateDirect(bytes.length);
+            bfr.put(bytes, 0, bytes.length);
+            bfr.flip();
+            texture = new Texture(bfr);
+        }
         return texture;
     }
 
