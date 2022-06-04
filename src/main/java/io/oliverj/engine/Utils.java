@@ -1,8 +1,10 @@
 package io.oliverj.engine;
 
+import javax.print.DocFlavor;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,14 @@ public class Utils {
             result = scanner.useDelimiter("\\A").next();
         }
         return result;
+    }
+
+    public static ByteBuffer loadImage(String filename) throws Exception {
+        byte [] result;
+        try (InputStream in = Utils.class.getResourceAsStream(filename)) {
+            result = in.readAllBytes();
+        }
+        return ByteBuffer.wrap(result).flip();
     }
 
     public static List<String> readAllLines(String fileName) throws Exception {

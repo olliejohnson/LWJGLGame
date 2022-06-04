@@ -15,9 +15,9 @@ import java.awt.*;
 
 public class Hud implements IHud {
 
-    private static final Font FONT = new Font("Minecraft", Font.PLAIN, 30);
+    private static final Font FONT = new Font("Arial", Font.PLAIN, 20);
 
-    private static final String CHARSET = "US-ASCII";
+    private static final String CHARSET = "ISO-8859-1";
 
     private final GameItem[] gameItems;
 
