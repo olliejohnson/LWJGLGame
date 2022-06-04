@@ -32,7 +32,7 @@ public class DummyGame implements IGameLogic {
 
     private static final float CAMERA_POS_STEP = 0.1f;
 
-    private boolean mouse_locked;
+    private boolean mouse_locked = true;
 
     public DummyGame() {
         renderer = new Renderer();
@@ -129,17 +129,13 @@ public class DummyGame implements IGameLogic {
             cameraInc.y = 1;
         }
         if (window.isKeyPressed(GLFW_KEY_L)) {
-            if (mouse_locked) {
-                mouse_locked = false;
-            } else {
-                mouse_locked = true;
-            }
+            mouse_locked = !mouse_locked;
         }
     }
 
     @Override
     public void update(Window window,float interval, MouseInput mouseInput) {
-        mouseInput.lockMouse(window, true);
+        mouseInput.lockMouse(window, mouse_locked);
         Vector2f rotVec = mouseInput.getDisplVec();
         camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
 

@@ -81,6 +81,7 @@ public class Renderer {
         skyBoxShaderProgram.createVertexShader(Utils.loadResource("/shaders/skyboxvertex.glsl"));
         skyBoxShaderProgram.createFragmentShader(Utils.loadResource("/shaders/skyboxfragment.glsl"));
         skyBoxShaderProgram.link();
+
         skyBoxShaderProgram.createUniform("projectionMatrix");
         skyBoxShaderProgram.createUniform("modelViewMatrix");
         skyBoxShaderProgram.createUniform("texture_sampler");
