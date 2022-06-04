@@ -5,6 +5,9 @@ import io.oliverj.engine.graph.*;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class DummyGame implements IGameLogic {
@@ -44,7 +47,8 @@ public class DummyGame implements IGameLogic {
 
         float reflectance = 1f;
         Mesh mesh = OBJLoader.loadMesh("/models/block.obj");
-        Texture texture = new Texture("textures/grassblock.png");
+
+        Texture texture = Texture.loadAsResource("/textures/grassblock.png");
         Material material = new Material(texture, reflectance);
         mesh.setMaterial(material);
 

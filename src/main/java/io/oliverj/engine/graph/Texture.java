@@ -1,5 +1,6 @@
 package io.oliverj.engine.graph;
 
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
@@ -17,6 +18,19 @@ public class Texture {
     private final int width;
 
     private final int height;
+
+    public static Texture loadAsResource(String name) throws Exception {
+        // 1 load image into ByteBuffer
+        // 2 construct Texture using ByteBuffer
+        InputStream in = Texture.class.getResourceAsStream("/textures/grassblock.png");
+        byte [] bytes = in.readAllBytes();
+        ByteBuffer bfr = ByteBuffer.allocateDirect(bytes.length);
+        bfr.put(bytes,0,bytes.length);
+        bfr.flip();
+
+        Texture texture = new Texture(bfr);
+        return texture;
+    }
 
     public Texture(String fileName) throws Exception {
         ByteBuffer buf;
