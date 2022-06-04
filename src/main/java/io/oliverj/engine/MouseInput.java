@@ -68,4 +68,13 @@ public class MouseInput {
     public boolean isRightButtonPressed() {
         return rightButtonPressed;
     }
+
+    public void lockMouse(Window window, Boolean lock) {
+        if (lock) {
+            glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+            glfwSetCursorPos(window.getWindowHandle(), window.getWidth()/2, window.getHeight()/2);
+        } else {
+            glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        }
+    }
 }

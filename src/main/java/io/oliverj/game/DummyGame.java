@@ -12,7 +12,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class DummyGame implements IGameLogic {
 
-    private static final float MOUSE_SENSITIVITY = 0.2f;
+    private static final float MOUSE_SENSITIVITY = 0.3f;
 
     private final Vector3f cameraInc;
 
@@ -30,7 +30,9 @@ public class DummyGame implements IGameLogic {
 
     private float lightAngle;
 
-    private static final float CAMERA_POS_STEP = 0.05f;
+    private static final float CAMERA_POS_STEP = 0.1f;
+
+    private boolean mouse_locked;
 
     public DummyGame() {
         renderer = new Renderer();
@@ -82,7 +84,7 @@ public class DummyGame implements IGameLogic {
         }
         scene.setGameItems(gameItems);
 
-        SkyBox skyBox = new SkyBox("/models/skybox.obj", "/textures/skybox.png");
+        SkyBox skyBox = new SkyBox("/models/skybox.obj","/textures/skybox.png");
         skyBox.setScale(skyBoxScale);
         scene.setSkyBox(skyBox);
 
@@ -126,16 +128,22 @@ public class DummyGame implements IGameLogic {
         } else if (window.isKeyPressed(GLFW_KEY_SPACE)) {
             cameraInc.y = 1;
         }
+        if (window.isKeyPressed(GLFW_KEY_L)) {
+            if (mouse_locked) {
+                mouse_locked = false;
+            } else {
+                mouse_locked = true;
+            }
+        }
     }
 
     @Override
-    public void update(float interval, MouseInput mouseInput) {
-        if (mouseInput.isRightButtonPressed()) {
-            Vector2f rotVec = mouseInput.getDisplVec();
-            camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
+    public void update(Window window,float interval, MouseInput mouseInput) {
+        mouseInput.lockMouse(window, true);
+        Vector2f rotVec = mouseInput.getDisplVec();
+        camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
 
-            hud.rotateCompass(camera.getRotation().y);
-        }
+        hud.rotateCompass(camera.getRotation().y);
 
         camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
 
