@@ -137,6 +137,7 @@ public class DummyGame implements IGameLogic {
 
         SceneLight sceneLight = scene.getSceneLight();
 
+        /*
         DirectionalLight directionalLight = sceneLight.getDirectionalLight();
         lightAngle += 1.1f;
         if (lightAngle > 90) {
@@ -161,7 +162,9 @@ public class DummyGame implements IGameLogic {
         double angRad = Math.toRadians(lightAngle);
         directionalLight.getDirection().x = (float) Math.sin(angRad);
         directionalLight.getDirection().y = (float) Math.cos(angRad);
+         */
     }
+
 
     @Override
     public void render(Window window) {
