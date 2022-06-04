@@ -172,6 +172,7 @@ public class DummyGame implements IGameLogic {
     @Override
     public void cleanup() {
         renderer.cleanup();
+        GameItem[] gameItems = scene.getGameItems();
         for (GameItem gameItem : gameItems) {
             gameItem.getMesh().cleanUp();
         }
